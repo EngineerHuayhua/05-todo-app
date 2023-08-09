@@ -1,4 +1,4 @@
-
+import { v4 as uuid } from "uuid";
 
 export class Todo {
 
@@ -7,7 +7,7 @@ export class Todo {
      * @param {String} descripcion 
      */
     constructor(descripcion) {
-        this.id = 1;
+        this.id = uuid();
         this.descripcion = descripcion;
         this.done = false;
         this.createAt = new Date();
