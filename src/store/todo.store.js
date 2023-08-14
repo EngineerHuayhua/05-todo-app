@@ -11,6 +11,8 @@ const state = {
         new Todo('Piedra del alma'),
         new Todo('Piedra del infinito'),
         new Todo('Piedra del tiempo'),
+        new Todo('Piedra del poder'),
+        new Todo('Piedra del realidad'),
     ],
     filter: Filter.All,
 }
@@ -25,7 +27,7 @@ const loadStore = () => {
     throw new Error('Not implemented');
 }
 
-const getTodo = (filter=Filter.All) => {
+const getTodos = (filter=Filter.All) => {
     
     switch(filter){
         case Filter.All:
@@ -56,7 +58,12 @@ const addTodo = (descripcion) => {
  * @param {String} todoId Todo identified
  */
 const toggleTodo = (todoId) => {
-    throw new Error('Not implemented');
+    state.todos = state.todos.map( todo => {
+        if (todo.id === todoId) {
+            todo.done = !todo.done;
+        }
+        return todo;
+    });
 }
 
 const deleteTodo = (todoId) => {
@@ -68,19 +75,23 @@ const deleteCompleted = () => {
     state.todos = state.todos.filter( todo => todo.done );
 }
 
+/**
+ * 
+ * @param {Filters} newFilter 
+ */
 const setFilter = (newFilter = Filter.All) => {
-    throw new Error('Not implemented');
+    state.filter = newFilter;
 }
 
 //no se debe exponer state ya podrian modificar el contenido del objeto
-const getCurrentFilter = (newFilter = Filter.All) => {
-    throw new Error('Not implemented');
+const getCurrentFilter = () => {
+    return state.filter;
 }
 
 
 
 export default {
-    getTodo,
+    getTodos,
     addTodo,
     initStore,
     loadStore,
